@@ -1,0 +1,13 @@
+﻿# OS junk
+.DS_Store
+Thumbs.db
+# Node
+node_modules/
+# Python
+__pycache__/
+*.py[cod]
+env/
+venv/
+# Logs / coverage
+*.log
+coverage/
