@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Australian Commonwealth FOI Redaction Tool - Secure document redaction for Freedom of Information requests" />
+    <meta name="keywords" content="FOI, redaction, Australian Government, document processing, privacy" />
+    <meta name="author" content="Australian Government" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#1f2937" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    
+    <title>FOI Redaction Tool - Australian Government</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+    
+    <style>
+      /* Critical CSS for initial render */
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #f9fafb;
+        color: #111827;
+      }
+      
+      /* Loading screen */
+      .initial-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #1f2937;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      
+      .loading-content {
+        text-align: center;
+        color: white;
+      }
+      
+      .loading-spinner {
+        width: 3rem;
+        height: 3rem;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 1rem;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      .loading-text {
+        font-size: 1.125rem;
+        font-weight: 500;
+      }
+      
+      .loading-subtext {
+        font-size: 0.875rem;
+        color: #d1d5db;
+        margin-top: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Initial loading screen -->
+    <div id="initial-loading" class="initial-loading">
+      <div class="loading-content">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <div class="loading-text">FOI Redaction Tool</div>
+        <div class="loading-subtext">Loading secure environment...</div>
+      </div>
+    </div>
+    
+    <!-- Main app root -->
+    <div id="root"></div>
+    
+    <!-- No JavaScript fallback -->
+    <noscript>
+      <div style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #1f2937;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+        z-index: 10000;
+      ">
+        <div>
+          <h1>JavaScript Required</h1>
+          <p>
+            The FOI Redaction Tool requires JavaScript to function properly.
+            Please enable JavaScript in your browser and refresh the page.
+          </p>
+          <p style="margin-top: 2rem; font-size: 0.875rem; color: #d1d5db;">
+            This application uses modern web technologies to ensure secure
+            document processing and encryption.
+          </p>
+        </div>
+      </div>
+    </noscript>
+    
+    <!-- Remove loading screen once React loads -->
+    <script>
+      // Remove loading screen when React takes over
+      window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          const loading = document.getElementById('initial-loading');
+          if (loading && document.getElementById('root').children.length > 0) {
+            loading.style.opacity = '0';
+            loading.style.transition = 'opacity 0.3s ease';
+            setTimeout(function() {
+              loading.remove();
+            }, 300);
+          }
+        }, 1000);
+      });
+    </script>
+    
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
