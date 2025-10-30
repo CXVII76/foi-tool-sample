@@ -15,7 +15,7 @@ const App: React.FC = () => {
           style={{ padding: '10px 20px', fontSize: '16px', marginTop: '20px' }}
           onClick={() => alert('GitHub Flow works!')}
         >
-          Click Me on Main
+          Press Here on Branch
         </button>
       </header>
     </div>
