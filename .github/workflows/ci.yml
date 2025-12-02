@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: '20'
       - run: npm ci
-      - run: npm run buil
+      - run: npm run build
       
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
