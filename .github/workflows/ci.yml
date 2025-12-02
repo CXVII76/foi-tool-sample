@@ -21,19 +21,22 @@ jobs:
       - run: npm run build
 
   deploy:
-    needs: test-and-build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: npm ci
-      - run: npm run build
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: foi-app-demo
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: dist
+  needs: test-and-build
+  runs-on: ubuntu-latest
+  if: github.ref == 'refs/heads/main'
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - run: npm ci
+    - run: npm run build
+    - name: Login to Azure
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.foi-app-demo.PublishSettings}}  # Uses your publish profile as creds
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: 'foi-app-demo'
+        package: 'dist'
