@@ -6,12 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext .ts,.tsx --max-warnings=0"    "preview": "vite preview",
-    "test": "vitest",
-    "test:e2e": "playwright test",
-    "test:coverage": "vitest --coverage",
-    "audit": "npm audit --audit-level moderate",
-    "sbom": "cyclonedx-npm --output-format json --output-file sbom.json"
+    "lint": "eslint . --ext .ts,.tsx --max-warnings=0",
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
