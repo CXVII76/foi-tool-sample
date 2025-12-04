@@ -54,7 +54,7 @@ export function ProtectedRoute({
 }
 
 // Higher-order component version
-// No use - eslint-disable-next-line react-refresh/only-export-components
+// eslint-disable-next-line react-refresh/only-export-components
 export function withProtection<P extends object>(
   Component: React.ComponentType<P>,
   options: Omit<ProtectedRouteProps, 'children'>
