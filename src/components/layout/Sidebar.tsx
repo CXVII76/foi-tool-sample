@@ -49,7 +49,7 @@ export function Sidebar() {
         <div className="sidebar-info">
           <p className="info-text">
             <strong>Security Notice:</strong> All documents are encrypted locally. 
-            Use "Panic Clear" to immediately remove all cached data.
+            Use 'Panic Clear' to immediately remove all cached data.
           </p>
         </div>
       </div>

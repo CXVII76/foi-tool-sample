@@ -34,7 +34,7 @@ export function ProtectedRoute({
     return fallback || (
       <div className="access-denied">
         <h2>Access Denied</h2>
-        <p>You don't have the required role ({requiredRole}) to access this page.</p>
+        <p>You have no the required role ({requiredRole}) to access this page.</p>
         <p>Your current role: {user.role}</p>
       </div>
     );
@@ -45,7 +45,7 @@ export function ProtectedRoute({
     return fallback || (
       <div className="access-denied">
         <h2>Access Denied</h2>
-        <p>You don't have permission to {requiredPermission.action} {requiredPermission.resource}.</p>
+        <p>You have no permission to {requiredPermission.action} {requiredPermission.resource}.</p>
       </div>
     );
   }
@@ -54,7 +54,7 @@ export function ProtectedRoute({
 }
 
 // Higher-order component version
-// eslint-disable-next-line react-refresh/only-export-components
+// No use - eslint-disable-next-line react-refresh/only-export-components
 export function withProtection<P extends object>(
   Component: React.ComponentType<P>,
   options: Omit<ProtectedRouteProps, 'children'>

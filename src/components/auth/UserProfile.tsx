@@ -32,7 +32,7 @@ export function UserProfile() {
       alert('All cached data has been cleared. You will be redirected to login.');
       window.location.href = '/login';
     } catch (error) {
-      console.error('Panic clear failed:', error);
+      //console.error('Panic clear failed:', error);
       alert('Failed to clear all data. Please try again or contact support.');
     } finally {
       setIsPanicClearing(false);

@@ -129,7 +129,7 @@ export function FileUpload({ onUploadComplete, className = '' }: FileUploadProps
           <li>Only text-based documents are supported</li>
           <li>Files are encrypted and cached locally during processing</li>
           <li>Original files are not stored permanently on the server</li>
-          <li>Use the "Panic Clear" feature to immediately remove all cached data</li>
+          <li>Use the 'Panic Clear' feature to immediately remove all cached data</li>
         </ul>
       </div>
 
