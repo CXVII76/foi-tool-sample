@@ -6,18 +6,24 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     'plugin:react/recommended',
-    'plugin:react-refresh/recommended',   // ← this line fixes the error
+    'plugin:react-refresh/recommended',   // ← THIS LINE MUST BE EXACTLY THIS STRING
     'prettier'
   ],
   parser: '@typescript-eslint/parser',
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module', project: './tsconfig.json' },
-  plugins: ['react', '@typescript-eslint', 'react-refresh'],  // ← add react-refresh here
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: './tsconfig.json'
+  },
+  plugins: ['react', '@typescript-eslint', 'react-refresh'],
   rules: {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     'no-console': 'warn',
-    'react-refresh/only-export-components': 'warn'  // ← optional: allow non-components if needed
+    'react-refresh/only-export-components': 'warn'
   },
-  settings: { react: { version: 'detect' } }
+  settings: {
+    react: { version: 'detect' }
+  }
 };
