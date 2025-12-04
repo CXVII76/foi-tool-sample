@@ -6,14 +6,14 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     'plugin:react/recommended',
-    'plugin:react-refresh/recommended',   // ← THIS LINE MUST BE EXACTLY THIS STRING
+    'plugin:react-refresh/recommended', // keep exactly this
     'prettier'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: './tsconfig.json'
+    sourceType: 'module'
+    // ❌ removed `project: './tsconfig.json'`
   },
   plugins: ['react', '@typescript-eslint', 'react-refresh'],
   rules: {
