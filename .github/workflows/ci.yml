@@ -31,13 +31,12 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Run Snyk to check for vulnerabilities
+      - name: Snyk Security Scan (fail only on High/Critical)
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        # optionally fail only on high severity or ignore vulnerabilities
-        # with:
-        #   args: --severity-threshold=high
+        with:
+          args: --severity-threshold=high
 
   deploy:
     needs: [test-and-build, security]
