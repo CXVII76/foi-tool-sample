@@ -129,7 +129,7 @@ export function ReasonCodeManager({ className = '' }: ReasonCodeManagerProps) {
                 </div>
               )}
               <div id="code-help" className="help-text">
-                Short identifier for the FOI exemption (e.g., 'FOI s 22')
+                Short identifier for the FOI exemption (e.g., "FOI s 22")
               </div>
             </div>
 
@@ -279,7 +279,7 @@ export function ReasonCodeManager({ className = '' }: ReasonCodeManagerProps) {
       <div className="guidelines-section">
         <h4>Usage Guidelines</h4>
         <ul>
-          <li>Use specific FOI section references in the code (e.g., 'FOI s 22')</li>
+          <li>Use specific FOI section references in the code (e.g., "FOI s 22")</li>
           <li>Keep descriptions concise but clear</li>
           <li>Group related exemptions using consistent categories</li>
           <li>Default reason codes are based on the Freedom of Information Act 1982</li>

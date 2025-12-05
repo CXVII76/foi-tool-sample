@@ -74,7 +74,7 @@ export function VersionControl({ className = '' }: VersionControlProps) {
       });
 
     } catch (error) {
-      //console.error('Failed to create working version:', error);
+      console.error('Failed to create working version:', error);
       alert('Failed to create working version. Please try again.');
     } finally {
       setIsProcessing(false);

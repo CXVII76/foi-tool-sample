@@ -57,7 +57,7 @@ export function DocumentViewer({ className = '' }: DocumentViewerProps) {
         }
       } catch (err) {
         setError('Failed to load document content');
-        //console.error('Document loading error:', err);
+        console.error('Document loading error:', err);
       } finally {
         setIsLoading(false);
       }
@@ -188,7 +188,7 @@ export function DocumentViewer({ className = '' }: DocumentViewerProps) {
     const selectedObject = event.target;
     if (selectedObject && selectedObject.data) {
       // Show redaction details or allow editing
-      //console.log('Redaction selected:', selectedObject.data);
+      console.log('Redaction selected:', selectedObject.data);
     }
   }, []);
 
@@ -196,7 +196,7 @@ export function DocumentViewer({ className = '' }: DocumentViewerProps) {
     const modifiedObject = event.target;
     if (modifiedObject && modifiedObject.data) {
       // Update redaction coordinates
-      //console.log('Redaction modified:', modifiedObject.data);
+      console.log('Redaction modified:', modifiedObject.data);
     }
   }, []);
 

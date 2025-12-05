@@ -34,7 +34,7 @@ export function ProtectedRoute({
     return fallback || (
       <div className="access-denied">
         <h2>Access Denied</h2>
-        <p>You have no the required role ({requiredRole}) to access this page.</p>
+        <p>You don't have the required role ({requiredRole}) to access this page.</p>
         <p>Your current role: {user.role}</p>
       </div>
     );
@@ -45,7 +45,7 @@ export function ProtectedRoute({
     return fallback || (
       <div className="access-denied">
         <h2>Access Denied</h2>
-        <p>You have no permission to {requiredPermission.action} {requiredPermission.resource}.</p>
+        <p>You don't have permission to {requiredPermission.action} {requiredPermission.resource}.</p>
       </div>
     );
   }
