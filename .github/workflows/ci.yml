@@ -29,14 +29,14 @@ jobs:
       - name: Install xmllint
         run: sudo apt-get update -q && sudo apt-get install -y libxml2-utils
 
-      - name: Download official OSCAL schema
+      - name: Download official OSCAL complete schema (2025 working URL)
         run: |
           mkdir -p oscal
-          wget -q https://raw.githubusercontent.com/usnistgov/OSCAL/main/src/schema/xml/oscal_complete_schema.xsd -O oscal/oscal_complete_schema.xsd
+          curl -L -o oscal/oscal_complete_schema.xsd \
+            https://raw.githubusercontent.com/usnistgov/OSCAL/v1.1.2/content/xml/schema/oscal_complete_schema.xsd
 
       - name: Validate ISM-OSCAL catalog
-        run: xmllint --noout --schema oscal/oscal_complete_schema.xsd oscal/ism-catalog.xml
-                
+        run: xmllint --noout --schema oscal/oscal_complete_schema.xsd oscal/ism-catalog.xml                
   security:
     # run right after dependencies are installed
     runs-on: ubuntu-latest
