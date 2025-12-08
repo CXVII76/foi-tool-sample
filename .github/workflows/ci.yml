@@ -20,6 +20,14 @@ jobs:
       - run: npm test
       - run: npm run build
 
+  oscal-validate:
+    needs: test-and-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate ISM-OSCAL catalog
+        run: npx xmllint --noout --schema oscal/oscal_complete_schema.xsd oscal/ism-catalog.xml
+
   security:
     # run right after dependencies are installed
     runs-on: ubuntu-latest
