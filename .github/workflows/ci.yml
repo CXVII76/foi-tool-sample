@@ -66,7 +66,7 @@ jobs:
     # THIS STEP IS CORRECTED with the new, verified URL for the ACSC catalog.
       - name: Download ACSC ISM OSCAL catalog
         run: |
-          curl -L --fail -o oscal/acsc-ism-catalog.xml https://raw.githubusercontent.com/AustralianCyberSecurityCentre/ism-oscal/main/catalogs/ACSC-ISM-2024-02/ACSC-ISM-2024-02-catalog.xml
+          curl -L --fail -o oscal/acsc-ism-catalog.xml https://www.cyber.gov.au/ism/oscal/v2024.03.5/artifacts/ISM_catalog.xml
           
     # This step is UPDATED to validate the new ACSC catalog file.
       - name: Validate ACSC ISM OSCAL catalog
