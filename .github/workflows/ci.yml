@@ -61,10 +61,11 @@ jobs:
       - name: Download official OSCAL schema and catalog
         run: |
           curl -L --fail -o oscal/oscal_complete_schema.xsd https://github.com/usnistgov/OSCAL/releases/download/v1.1.2/oscal_complete_schema.xsd
-          curl -L --fail -o oscal/ism-catalog.xml https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/xml/NIST_SP-800-53_rev5_catalog.xml
-          
-      - name: Validate ISM-OSCAL catalog
-        run: xmllint --noout --schema oscal/oscal_complete_schema.xsd oscal/ism-catalog.xml
+          curl -L --fail -o oscal/acsc-ism-catalog.xml https://raw.githubusercontent.com/AustralianCyberSecurityCentre/ism-oscal/main/catalogs/ACSC-ISM-December-2023/xml/ACSC-ISM-December-2023-catalog.xml
+      
+    # This step is UPDATED to validate the new ACSC catalog file.
+      - name: Validate ACSC ISM OSCAL catalog
+        run: xmllint --noout --schema oscal/oscal_complete_schema.xsd oscal/acsc-ism-catalog.xml
 
   deploy:
     # This job now only needs the output from the first job.
