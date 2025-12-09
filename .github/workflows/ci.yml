@@ -33,7 +33,7 @@ jobs:
         run: |
           mkdir -p oscal
           curl -L -o oscal/oscal_complete_schema.xsd \
-            https://raw.githubusercontent.com/usnistgov/OSCAL/v1.1.2/content/xml/schema/oscal_complete_schema.xsd
+            https://github.com/usnistgov/OSCAL/releases/download/v1.1.2/oscal_complete_schema.xsd
 
       - name: Validate ISM-OSCAL catalog
         run: xmllint --noout --schema oscal/oscal_complete_schema.xsd oscal/ism-catalog.xml                
