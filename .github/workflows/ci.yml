@@ -41,7 +41,8 @@ jobs:
     # This step Download OSCAL catalog for validation
     - name: Download OSCAL catalog for validation
       run: |
-        curl -L --fail -o oscal/ism-catalog.xml https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/xml/NIST_SP800-53_rev5_catalog.xml
+        curl -L --fail -o oscal/ism-catalog.xml https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/xml/NIST_SP-800-53_rev5_catalog.xml
+
 
     # This is the final validation step.
     - name: Validate ISM-OSCAL catalog
