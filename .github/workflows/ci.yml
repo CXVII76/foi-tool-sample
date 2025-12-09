@@ -36,7 +36,7 @@ jobs:
     # This step downloads the OSCAL schema. It was missing from this job.
     - name: Download official OSCAL schema (v1.1.2 stable)
       run: 
-        curl -L --fail -o oscal/ism-catalog.xml https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/xml/NIST_SP-800-53_rev5_catalog.xml
+        curl -L --fail -o oscal/oscal_complete_schema.xsd https://github.com/usnistgov/OSCAL/releases/download/v1.1.2/oscal_complete_schema.xsd
 
     # This step Download OSCAL catalog for validation
     - name: Download OSCAL catalog for validation
