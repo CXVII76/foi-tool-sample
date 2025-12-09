@@ -7,80 +7,82 @@ on:
     branches: [ main ]
 
 jobs:
-  test-and-build:
+  test-build-and-scan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
-      - run: npm run build
+          
+      - name: Install Dependencies
+        run: npm ci
+        
+      - name: Run Linter
+        run: npm run lint
+        
+      - name: Run Tests
+        run: npm test
 
-  oscal-validate:
-    needs: test-and-build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Install xmllint
-      run: sudo apt-get update -q && sudo apt-get install -y libxml2-utils
-
-      # This step creates the directory where the files will be stored.
-    - name: Create OSCAL directory
-      run:  mkdir -p oscal
-
-    # This step downloads the OSCAL schema. It was missing from this job.
-    - name: Download official OSCAL schema (v1.1.2 stable)
-      run: 
-        curl -L --fail -o oscal/oscal_complete_schema.xsd https://github.com/usnistgov/OSCAL/releases/download/v1.1.2/oscal_complete_schema.xsd
-
-    # This step Download OSCAL catalog for validation
-    - name: Download OSCAL catalog for validation
-      run: |
-        curl -L --fail -o oscal/ism-catalog.xml https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/xml/NIST_SP-800-53_rev5_catalog.xml
-
-
-    # This is the final validation step.
-    - name: Validate ISM-OSCAL catalog
-      run: xmllint --noout --schema oscal/oscal_complete_schema.xsd oscal/ism-catalog.xml
-
-  security:
-    # run right after dependencies are installed
-    runs-on: ubuntu-latest
-    needs: test-and-build
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - run: npm ci
+      # Recommendation 2: Security scan is now part of this job.
+      # It runs immediately after dependencies are installed and tested.
       - name: Snyk Security Scan (fail only on High/Critical)
-        uses: snyk/actions/node@master
+        # Recommendation 3: Pinning to a specific version instead of @master.
+        uses: snyk/actions/node@0.3.0 
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --severity-threshold=high
 
+      - name: Build Application
+        run: npm run build
+
+      # Recommendation 1: Upload the build output as an artifact.
+      # The 'dist' directory (or 'build', etc.) will be saved.
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build
+          path: ./dist # Adjust if your build output folder has a different name
+
+  oscal-validate:
+    needs: test-build-and-scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install xmllint
+        run: sudo apt-get update -q && sudo apt-get install -y libxml2-utils
+        
+      - name: Create OSCAL directory
+        run: mkdir -p oscal
+        
+      - name: Download official OSCAL schema and catalog
+        run: |
+          curl -L --fail -o oscal/oscal_complete_schema.xsd https://github.com/usnistgov/OSCAL/releases/download/v1.1.2/oscal_complete_schema.xsd
+          curl -L --fail -o oscal/ism-catalog.xml https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/xml/NIST_SP-800-53_rev5_catalog.xml
+          
+      - name: Validate ISM-OSCAL catalog
+        run: xmllint --noout --schema oscal/oscal_complete_schema.xsd oscal/ism-catalog.xml
+
   deploy:
-    needs: [test-and-build, security]
+    # This job now only needs the output from the first job.
+    needs: test-build-and-scan 
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      # Recommendation 1: No need to checkout or build again.
+      # Just download the artifact from the 'test-build-and-scan' job.
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
         with:
-          node-version: 20
-      - run: npm ci
-      - run: npm run build
+          name: production-build
+          path: ./dist # The artifact will be downloaded into this directory
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: foi-app-demo
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: ./dist
+          package: ./dist # Deploy the downloaded artifact
