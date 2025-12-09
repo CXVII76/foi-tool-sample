@@ -58,15 +58,11 @@ jobs:
       - name: Create OSCAL directory
         run: mkdir -p oscal
 
-    # This step remains the same. It downloads the universal OSCAL schema standard.    
-      - name: Download official OSCAL schema and catalog
+    # Combined download steps and added --http1.1 to the cyber.gov.au URL    
+      - name: Download official OSCAL schema and ACSC Catalog
         run: |
           curl -L --fail -o oscal/oscal_complete_schema.xsd https://github.com/usnistgov/OSCAL/releases/download/v1.1.2/oscal_complete_schema.xsd
-
-    # THIS STEP IS CORRECTED with the new, verified URL for the ACSC catalog.
-      - name: Download ACSC ISM OSCAL catalog
-        run: |
-          curl -L --fail -o oscal/acsc-ism-catalog.xml https://www.cyber.gov.au/ism/oscal/v2024.03.5/artifacts/ISM_catalog.xml
+          curl -L --fail --http1.1 -o oscal/acsc-ism-catalog.xml https://www.cyber.gov.au/ism/oscal/v2024.03.5/artifacts/ISM_catalog.xml
           
     # This step is UPDATED to validate the new ACSC catalog file.
       - name: Validate ACSC ISM OSCAL catalog
