@@ -44,7 +44,7 @@ jobs:
     # you should DELETE this download step and make sure your file is in the 'oscal/' directory.
     - name: Download ISM OSCAL catalog for validation
       run: |
-        curl -L --fail -o oscal/ism-catalog.xml https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/xml/NIST_SP800-53_rev5_catalog.xml
+        curl -L --fail -o oscal/ism-catalog.xml https://raw.githubusercontent.com/usnistgov/oscal-content/main/SP800-53/rev5/xml/NIST_SP800-53_rev5_catalog.xml
 
     # This is the final validation step.
     - name: Validate ISM-OSCAL catalog
